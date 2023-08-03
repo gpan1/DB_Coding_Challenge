@@ -9,7 +9,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface BooksRepository extends JpaRepository<Book, String>{
-   @Query(nativeQuery = true, value = "select * from book where book_name = :book_name")
-   List<Book> findByBookName(Book book_name);
+public interface BooksRepository extends JpaRepository<Book, String> {
+    //find book starting with a letter
+    @Query(nativeQuery = true, value = "select * from books where book_name like :letter")
+    List<Book> findBookNameStartingWithLetter(String letter);
+  
 }

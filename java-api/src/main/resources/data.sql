@@ -1,6 +1,6 @@
--- INSERT INTO dogs (dog_id, name, age) VALUES (1, 'Einstein', 3);
--- INSERT INTO dogs (dog_id, name, age) VALUES (2, 'Kaya', 5);
--- INSERT INTO dogs (dog_id, name, age) VALUES (3, 'Lassie', 7);
-
-insert into books (book_name) values ('The Hobbit');
-insert into books (book_name) values ('The Lord of the Rings');
+insert into books (book_id, book_name) values (1, 'Trading_book_1');
+insert into books (book_id, book_name) values (2, 'Trading_book_2');
+insert into books (book_id, book_name) values (3, 'Trading_book_3');
+insert into books (book_id, book_name) values (4, 'Trading_book_4');
+insert into books (book_id, book_name) values (5, 'Trading_book_5');
+insert into books (book_id, book_name) values (6, 'Trading_book_6');
