@@ -1,14 +1,3 @@
--- DROP TABLE IF EXISTS dogs;
--- CREATE TABLE dogs (
---     dog_id INT NOT NULL,
---     name VARCHAR(250) NOT NULL,
---     age INT NOT NULL
--- );
-
--- DROP DATABASE IF EXISTS bonds;
--- CREATE DATABASE bonds;
--- use bonds;
-
 drop table if exists book;
 CREATE TABLE book (
   id int NOT NULL,

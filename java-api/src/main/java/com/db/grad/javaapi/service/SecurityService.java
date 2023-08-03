@@ -8,11 +8,15 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class BondsService {
+public class SecurityService {
     @Autowired
     private SecurityRepository securityRepository;
 
     public List<Security> getAllBonds(){
         return securityRepository.findAll();
+    }
+
+    public List<Security> getBondsByMaturityDate(String maturityDate) {
+        return securityRepository.findBondsByMaturityDate(maturityDate);
     }
 }

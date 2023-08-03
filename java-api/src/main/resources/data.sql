@@ -1,7 +1,3 @@
--- INSERT INTO dogs (dog_id, name, age) VALUES (1, 'Einstein', 3);
--- INSERT INTO dogs (dog_id, name, age) VALUES (2, 'Kaya', 5);
--- INSERT INTO dogs (dog_id, name, age) VALUES (3, 'Lassie', 7);
-
 insert into book(id, name) values (1, 'Trading_book_1');
 insert into book(id, name) values (2, 'Trading_book_2');
 insert into book(id, name) values (3, 'Trading_book_3');

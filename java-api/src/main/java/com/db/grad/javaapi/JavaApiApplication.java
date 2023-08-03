@@ -26,7 +26,7 @@ public class JavaApiApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		System.out.println("Hello");
+		System.out.println("Running...");
 
 		// List<Book> books = booksRepository.findAll();
 		// for(Book book : books) {
