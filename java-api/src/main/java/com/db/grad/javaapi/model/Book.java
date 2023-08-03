@@ -5,37 +5,37 @@
  import javax.persistence.Id;
  import javax.persistence.Table;
 
-
  @Entity
- @Table(name="books")
+ @Table(name="book")
  public class Book{
-     @Id
-     private long book_id;
-     private String book_name;
+    @Id
+    private long id;
+    private String name;
 
-     @Column(name="book_id", nullable=false)
-     public long getBook_id(){
-         return book_id;
-     }
+    @Id
+    @Column(name="id", nullable=false)
+    public long getId(){
+        return id;
+    }
 
-     public void setBook_id(long book_id){
-         this.book_id = book_id;
-     }
+    public void setId(long id){
+        this.id = id;
+    }
 
-     @Column(name="book_name", nullable=false)
-     public String getBook_name(){
-         return book_name;
-     }
+    @Column(name="name", nullable=false)
+    public String getName(){
+        return name;
+    }
 
-     public void setBook_name(String book_name){
-         this.book_name = book_name;
-     }
+    public void setName(String name){
+        this.name = name;
+    }
 
-     @Override
-     public String toString(){
-         return "Book{" +
-                 "book_id='" + book_id + '\'' +
-                 ", book_name='" + book_name + '\'' +
-                 '}';
-     }
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
  }

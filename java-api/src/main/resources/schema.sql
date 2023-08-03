@@ -1,57 +1,63 @@
-drop table if exists books;
-create table books (
-    book_id int not null,
-    book_name varchar(250) not null
-);
+-- DROP TABLE IF EXISTS dogs;
+-- CREATE TABLE dogs (
+--     dog_id INT NOT NULL,
+--     name VARCHAR(250) NOT NULL,
+--     age INT NOT NULL
+-- );
 
 -- DROP DATABASE IF EXISTS bonds;
 -- CREATE DATABASE bonds;
 -- use bonds;
 
--- CREATE TABLE book (
---   id int NOT NULL AUTO_INCREMENT,
---   name varchar(255) NOT NULL,
---   PRIMARY KEY (id)
--- ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+drop table if exists book;
+CREATE TABLE book (
+  id int NOT NULL,
+  name varchar(255) NOT NULL,
+  PRIMARY KEY (id)
+);
 
--- CREATE TABLE user (
---   id int NOT NULL AUTO_INCREMENT,
---   name varchar(255) NOT NULL,
---   email varchar(255) NOT NULL,
---   role varchar(255) NOT NULL,
---   PRIMARY KEY (id)
--- ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+drop table if exists users;
+CREATE TABLE users (
+  id int NOT NULL,
+  name varchar(255) NOT NULL,
+  email varchar(255) NOT NULL,
+  role varchar(255) NOT NULL,
+  PRIMARY KEY (id)
+);
 
--- CREATE TABLE counterparty (
---   id int NOT NULL AUTO_INCREMENT,
---   name varchar(255) NOT NULL,
---   PRIMARY KEY (id)
--- ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+drop table if exists counterparty;
+CREATE TABLE counterparty (
+  id int NOT NULL,
+  name varchar(255) NOT NULL,
+  PRIMARY KEY (id)
+);
 
+-- drop table if exists book_user;
 -- CREATE TABLE book_user (
 --   book_id int NOT NULL,
 --   user_id int NOT NULL,
 --   KEY FK1_book_id (book_id),
 --   KEY FK_user_id (user_id)
--- ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+-- );
 
+drop table if exists security;
+CREATE TABLE security (
+  id int NOT NULL,
+  isin varchar(50) DEFAULT NULL,
+  cusip varchar(50) DEFAULT NULL,
+  issuer_name varchar(255) NOT NULL,
+  maturity_date datetime NOT NULL,
+  coupon float NOT NULL,
+  type varchar(255) NOT NULL,
+  face_value float NOT NULL,
+  currency varchar(10) NOT NULL,
+  status varchar(32) DEFAULT NULL,
+  PRIMARY KEY (id)
+);
 
--- CREATE TABLE security (
---   id int NOT NULL AUTO_INCREMENT,
---   isin varchar(50) DEFAULT NULL,
---   cusip varchar(50) DEFAULT NULL,
---   issuer_name varchar(255) NOT NULL,
---   maturity_date datetime NOT NULL,
---   coupon float NOT NULL,
---   type varchar(255) NOT NULL,
---   face_value float NOT NULL,
---   currency varchar(10) NOT NULL,
---   status varchar(32) DEFAULT NULL,
---   PRIMARY KEY (id)
--- ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
+-- drop table if exists trades;
 -- CREATE TABLE trades (
---   id int NOT NULL AUTO_INCREMENT,
+--   id int NOT NULL,
 --   book_id int NOT NULL,
 --   security_id int NOT NULL,
 --   counterparty_id int NOT NULL,
@@ -66,7 +72,6 @@ create table books (
 --   KEY FK_security_id (security_id),
 --   KEY FK_counterparty_id (counterparty_id),
 --   KEY FK_book_id (book_id)
--- ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
+-- );
 
 -- ALTER TABLE book_user ADD PRIMARY KEY(book_id, user_id);
