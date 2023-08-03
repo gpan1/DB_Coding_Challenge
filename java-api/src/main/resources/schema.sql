@@ -1,18 +1,10 @@
-drop table if exists books;
-create table books (
-    book_id int not null,
-    book_name varchar(250) not null
+drop table if exists book;
+
+CREATE TABLE book (
+  id int NOT NULL AUTO_INCREMENT,
+  name varchar(255) NOT NULL,
+  PRIMARY KEY (id)
 );
-
--- DROP DATABASE IF EXISTS bonds;
--- CREATE DATABASE bonds;
--- use bonds;
-
--- CREATE TABLE book (
---   id int NOT NULL AUTO_INCREMENT,
---   name varchar(255) NOT NULL,
---   PRIMARY KEY (id)
--- ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- CREATE TABLE user (
 --   id int NOT NULL AUTO_INCREMENT,
