@@ -6,3 +6,7 @@ CREATE TABLE dogs (
     age INT NOT NULL
 );
 
+-- drop table if exists books;
+-- create table books (
+--     book_name varchar(250) not null
+-- );
