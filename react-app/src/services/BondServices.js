@@ -7,6 +7,11 @@ export const findBonds = () => {
 };
 
 export const findMatureBonds = () => {
-  const bonds = axios.get(`${hostNameUrl}`);
+  const bonds = axios.get(`${hostNameUrl}/matured`);
+  return bonds;
+};
+
+export const findMaturingBonds = () => {
+  const bonds = axios.get(`${hostNameUrl}/maturing`);
   return bonds;
 };
