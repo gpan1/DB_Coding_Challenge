@@ -1,10 +1,10 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import { Pets } from "./Pets";
+import { Bonds } from "./Bonds";
 
-describe("<Pets />", () => {
+describe("<Bonds />", () => {
   it("component should render", () => {
-    const { container } = render(<Pets />);
+    const { container } = render(<Bonds />);
     expect(container).toBeDefined();
   });
 });
