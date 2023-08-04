@@ -1,53 +1,63 @@
-// package com.db.grad.javaapi.model;
+package com.db.grad.javaapi.model;
 
-// import javax.persistence.Column;
-// import javax.persistence.Entity;
-// import javax.persistence.Id;
-// import javax.persistence.Table;
+import javax.persistence.*;
 
-// @Entity
-// @Table(name="user")
-// public class User {
-//    @Id
-//    private long id;
-//    private String name;
-//    private String email;
-//    private String role;
+@Entity
+@Table(name="users")
+public class User {
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    @Column(name="id", nullable=false)
+    private int id;
 
-//    @Id
-//    @Column(name="id", nullable=false)
-//    public long getId(){
-//        return id;
-//    }
+    @Column(name="name", nullable=false)
+    private String name;
 
-//    public void setId(long id){
-//        this.id = id;
-//    }
+    @Column(name="email", nullable=false)
+    private String email;
 
-//    @Column(name="name", nullable=false)
-//    public String getName() {
-//       return name;
-//    }
+    @Column(name="role", nullable=false)
+    private String role;
+   
+    public int getId(){
+        return id;
+    }
 
-//    public void setName(String name) {
-//       this.name = name;
-//    }
+    public void setId(int id){
+        this.id = id;
+    }
 
-//    @Column(name="email", nullable=false)
-//    public String getEmail() {
-//       return email;
-//    }
+    public String getName() {
+        return name;
+    }
 
-//    public void setEmail(String email) {
-//       this.email = email;
-//    }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-//    @Column(name="role", nullable=false)
-//    public String getRole() {
-//       return role;
-//    }
+    public String getEmail() {
+        return email;
+    }
 
-//    public void setRole(String role) {
-//       this.role = role;
-//    }
-// }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", role='" + role + '\'' +
+                '}';
+    }
+}

@@ -2,14 +2,18 @@ package com.db.grad.javaapi.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="security")
 public class Security {
-   @Id
-    private long id;
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private int id;
+   
     private String isin;
     private String cusip;
     private String issuerName;
@@ -22,11 +26,11 @@ public class Security {
 
     @Id
     @Column(name="id", nullable=false)
-    public long getId(){
+    public int getId(){
         return id;
     }
 
-    public void setId(long id){
+    public void setId(int id){
         this.id = id;
     }
 

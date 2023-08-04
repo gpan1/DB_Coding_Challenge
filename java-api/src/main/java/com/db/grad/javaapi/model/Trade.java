@@ -1,11 +1,6 @@
 package com.db.grad.javaapi.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 // @Entity
 // @Table(name="trades")
@@ -159,9 +154,10 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="trades")
-public class Trades {
-    @Id
-    private long id;
+public class Trade {
+  @Id
+  @GeneratedValue(strategy=GenerationType.AUTO)
+  private int id;
 
     // @OneToMany
     // private Books book;
@@ -172,21 +168,21 @@ public class Trades {
     // @OneToMany
     // private CounterParty counterParty;
 
-    private String currency;
-    private String status;
-    private int quantity;
-    private float unitPrice;
-    private String buySell;
-    private String tradeDate;
-    private String settlementDate;
+  private String currency;
+  private String status;
+  private int quantity;
+  private float unitPrice;
+  private String buySell;
+  private String tradeDate;
+  private String settlementDate;
 
-    @Id
-    @Column(name="id", nullable=false)
-    public long getId(){
-      return id;
-    }
+  @Id
+  @Column(name="id", nullable=false)
+  public int getId(){
+    return id;
+  }
 
-  public void setId(long id) {
+  public void setId(int id) {
     this.id = id;
   }
 

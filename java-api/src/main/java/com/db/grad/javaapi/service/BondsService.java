@@ -3,7 +3,7 @@ package com.db.grad.javaapi.service;
 import java.util.*;
 import java.time.*;
 import org.javatuples.Pair;
-import com.db.grad.javaapi.model.Trades;
+import com.db.grad.javaapi.model.Trade;
 import com.db.grad.javaapi.model.Security;
 import org.springframework.stereotype.Service;
 import org.springframework.boot.CommandLineRunner;
@@ -23,8 +23,14 @@ public class BondsService implements CommandLineRunner{
         return securityRepository.findAll();
     }
 
-    public Security getBondById(long id){
-        return securityRepository.findById(id).get();
+    public Security getBondById(int id){
+        List<Security> bonds = securityRepository.findAll();
+        for (Security bond : bonds) {
+            if (bond.getId() == id) {
+                return bond;
+            }
+        }
+        return null;
     }
 
     public String getBond(){
@@ -56,29 +62,28 @@ public class BondsService implements CommandLineRunner{
         return qualifying;
     }   
     
-     //combine mature and maturing bonds into one method
-    public Pair<List<Security>, List<Security>> bondsMaturedAndMaturing(){
-        List<Security> bonds = securityRepository.findAll();
-        List<Security> matured = new ArrayList<Security>();
-        List<Security> maturing = new ArrayList<Security>();
-        LocalDate today = LocalDate.now(); //today's date
-        for (Security bond : bonds) {
-            if (LocalDate.parse(bond.getMaturityDate()).isAfter(today) && LocalDate.parse(bond.getMaturityDate()).isBefore(today.plusDays(5))) {
-                maturing.add(bond);
-            }
-            else if (LocalDate.parse(bond.getMaturityDate()).isAfter(today.minusDays(5)) && LocalDate.parse(bond.getMaturityDate()).isBefore(today)) {
-                matured.add(bond);
-            }
-            else continue;
-        }
-        return new Pair<List<Security>, List<Security>>(matured, maturing);
-    }
+    // public Pair<List<Security>, List<Security>> bondsMaturedAndMaturing(){  //mature and maturing bonds
+    //     List<Security> bonds = securityRepository.findAll();
+    //     List<Security> matured = new ArrayList<Security>();
+    //     List<Security> maturing = new ArrayList<Security>();
+    //     LocalDate today = LocalDate.now(); //today's date
+    //     for (Security bond : bonds) {
+    //         if (LocalDate.parse(bond.getMaturityDate()).isAfter(today) && LocalDate.parse(bond.getMaturityDate()).isBefore(today.plusDays(5))) {
+    //             maturing.add(bond);
+    //         }
+    //         else if (LocalDate.parse(bond.getMaturityDate()).isAfter(today.minusDays(5)) && LocalDate.parse(bond.getMaturityDate()).isBefore(today)) {
+    //             matured.add(bond);
+    //         }
+    //         else continue;
+    //     }
+    //     return new Pair<List<Security>, List<Security>>(matured, maturing);
+    // }
 
-    public List<Trades> bondsToBeSettled(){ //compare settlement date to today's date
-        List<Trades> trades = tradeRepository.findAll();
-        List<Trades> qualifying = new ArrayList<Trades>();
+    public List<Trade> bondsToBeSettled(){ //compare settlement date to today's date
+        List<Trade> trades = tradeRepository.findAll();
+        List<Trade> qualifying = new ArrayList<Trade>();
         LocalDate today = LocalDate.now(); //today's date
-        for (Trades trade : trades) {
+        for (Trade trade : trades) {
             if (LocalDate.parse(trade.getSettlementDate()).isAfter(today)) {
                 qualifying.add(trade);
             }
@@ -100,7 +105,7 @@ public class BondsService implements CommandLineRunner{
     //     List<Security> bonds = securityRepository.findAll();
     //     List<Security> qualifying = new ArrayList<Security>();
     //     for (Security bond : bonds) {
-    //         if (bond.getBookId() == id) {
+    //         if (bond.getBookId() == user_id) {
     //             qualifying.add(bond);
     //         }
     //     }
@@ -112,6 +117,7 @@ public class BondsService implements CommandLineRunner{
         System.out.println("Testing");
         System.out.println(LocalDate.parse("2023-08-03"));
         System.out.println(bondsISINandCUSIP(0));
-        System.out.println(bondsMaturedAndMaturing());
+        // System.out.println(bondsMaturedAndMaturing());
+        System.out.println(getBondById(1));
     }
 }

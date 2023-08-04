@@ -2,7 +2,7 @@ package com.db.grad.javaapi.controller;
 
 import java.util.List;
 import org.javatuples.Pair;
-import com.db.grad.javaapi.model.Trades;
+import com.db.grad.javaapi.model.Trade;
 import com.db.grad.javaapi.model.Security;
 import com.db.grad.javaapi.service.BondsService;
 import org.springframework.web.bind.annotation.*;
@@ -18,13 +18,13 @@ public class BondsController {
         return bondsService.getBond();
     }
 
-    @GetMapping("/bonds")
+    @GetMapping("/bonds/all")
     public List<Security> getAllBonds(){
         return bondsService.getAllBonds();
     }
 
-    @GetMapping("/bonds/byId")
-    public Security getBondById(@PathVariable(value = "id") long id){
+    @GetMapping("/bonds/{id}")
+    public Security getBondById(@PathVariable int id){
         return bondsService.getBondById(id);
     }
 
@@ -38,20 +38,17 @@ public class BondsController {
         return bondsService.bondsMatured();
     }
 
-    @GetMapping("/bonds/matured and maturing")
-    public Pair<List<Security>, List<Security>> getBondsMaturedAndMaturing(){
-        return bondsService.bondsMaturedAndMaturing();
-    }
-    // public List<Security> getBondsMaturedAndMaturing(){
-    //     return bondsService.bondsMaturedAndMaturing().getValue0()
+    // @GetMapping("/bonds/matured and maturing")
+    // public Pair<List<Security>, List<Security>> getBondsMaturedAndMaturing(){
+    //     return bondsService.bondsMaturedAndMaturing();
     // }
 
     @GetMapping("/bonds/to be settled")
-    public List<Trades> getBondsToBeSettled(){
+    public List<Trade> getBondsToBeSettled(){
         return bondsService.bondsToBeSettled();
     }
 
-    @GetMapping("/bonds/ISINandCUSIP/byId")
+    @GetMapping("/bonds/ISINandCUSIP/{id}")
     public String getBondsISINandCUSIP(@PathVariable int id){
         return bondsService.bondsISINandCUSIP(id);
     }
