@@ -44,6 +44,17 @@ public class BondsController {
     @GetMapping("/bonds/to be settled")
     public List<Trades> getBondsToBeSettled(){
         return bondsService.bondsToBeSettled();
+    } 
+
+    //B.P 
+    @GetMapping("/bonds/issuer")
+    public String getBondsIssuer(int id){
+        return bondsService.bondsIssuer(int id);
+    } 
+
+    @GetMapping("/bonds/holder")
+    public String getBondsHolder(int id){
+        return bondsService.bondsHolder(int id);
     }
 
-}
+} 

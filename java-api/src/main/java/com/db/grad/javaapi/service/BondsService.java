@@ -72,7 +72,28 @@ public class BondsService implements CommandLineRunner{
             }
         }
         return qualifying;
-    }
+    } 
+
+    //B.P 
+    /**
+    private Pair<String, String> bondsIssuerAndHolder(int id){
+        // Won't work. 
+        // One cannot be the bond Issuer and Holder at the same time
+    } 
+
+    */
+    
+    public String bondsIssuer(int id){
+        List<Security> bonds = securityRepository.findAll(); 
+        String nameOfIssuer = bonds.get(id).getIssuerName(); 
+        return nameOfIssuer;
+    } 
+
+    public String bondsHolder(int id){ 
+        List<Security> bonds = securityRepository.findAll(); 
+        String nameOfHolder = bonds.get(id).getHolderName(); 
+        return nameOfIssuer;
+    } 
 
     @Override
     public void run(String... args) throws Exception {
