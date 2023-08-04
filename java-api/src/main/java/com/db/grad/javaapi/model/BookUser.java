@@ -5,45 +5,48 @@
 // import javax.persistence.Id;
 // import javax.persistence.Table;
 
+// // drop table if exists book_user;
 // // CREATE TABLE book_user (
-// // --   book_id int NOT NULL,
-// // --   user_id int NOT NULL,
-// // --   KEY FK1_book_id (book_id),
-// // --   KEY FK_user_id (user_id)
-// // -- );
-// // -- ALTER TABLE book_user ADD PRIMARY KEY(book_id, user_id);
+// //   book_id int NOT NULL,
+// //   users_id int NOT NULL,
+// //   FOREIGN KEY (users_ID) REFERENCES Users (ID),
+// //   FOREIGN KEY (book_ID) REFERENCES Book (ID)
+// // );
+// // ALTER TABLE book_user ADD PRIMARY KEY(book_id, users_id);
 
 // @Entity
 // @Table(name="book_user")
 // public class BookUser {
 //     @Id
-//     private long book_id;
-//     @Id
-//     private long user_id;
-
+//     private long id;
+    
 //     @Column(name="book_id", nullable=false)
-//     public long getBook_id() {
-//         return book_id;
+//     private long bookId;
+    
+//     @Column(name="users_id", nullable=false)
+//     private long usersId;
+    
+//     public long getId(){
+//         return id;
 //     }
-
-//     public void setBook_id(long book_id) {
-//         this.book_id = book_id;
+    
+//     public void setId(long id){
+//         this.id = id;
 //     }
-
-//     @Column(name="user_id", nullable=false)
-//     public long getUser_id() {
-//         return user_id;
+    
+//     public long getBookId(){
+//         return bookId;
 //     }
-
-//     public void setUser_id(long user_id) {
-//         this.user_id = user_id;
+    
+//     public void setBookId(long bookId){
+//         this.bookId = bookId;
 //     }
-
-//     @Override
-//     public String toString() {
-//         return "BookUser{" +
-//                 "book_id=" + book_id +
-//                 ", user_id=" + user_id +
-//                 '}';
+    
+//     public long getUsersId(){
+//         return usersId;
+//     }
+    
+//     public void setUsersId(long usersId){
+//         this.usersId = usersId;
 //     }
 // }

@@ -7,13 +7,13 @@
 // import javax.persistence.Table;
 
 // @Entity
-// @Table(name="trade")
-// public class Trade {
+// @Table(name="trades")
+// public class Trades {
 //   @Id
 //   private long id;
 
 //   @OneToOne
-//   private Book book;
+//   private Books book;
 
 //   @OneToOne
 //   private Security security;
@@ -39,11 +39,11 @@
 //     this.id = id;
 //   }
 
-//   public Book getBook() {
+//   public Books getBook() {
 //     return book;
 //   }
 
-//   public void setBook(Book book) {
+//   public void setBook(Books book) {
 //     this.book = book;
 //   }
 

@@ -7,7 +7,7 @@
 
  @Entity
  @Table(name="book")
- public class Book{
+ public class Books {
     @Id
     private long id;
     private String name;
