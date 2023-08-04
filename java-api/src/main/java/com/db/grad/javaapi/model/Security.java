@@ -13,7 +13,7 @@ public class Security {
     private String isin;
     private String cusip;
     private String issuerName; 
-    private String holderName; // B.P
+    //private String holderName; // B.P
     private String maturityDate;
     private float coupon;
     private String type;
@@ -113,7 +113,8 @@ public class Security {
     } 
 
     //B.P 
-    @Column(name="bond_holder", nullable=false)
+     
+     @Column(name="bond_holder", nullable=false)
     public String getHolderName(){
         return holderName;
     }
@@ -122,6 +123,7 @@ public class Security {
         this.holderName = holderName;
     } 
 
+    // ", holderName='" + holderName + '\'' + 
     // end B.P methods
 
     @Override

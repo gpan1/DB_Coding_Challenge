@@ -92,8 +92,10 @@ public class BondsService implements CommandLineRunner{
     public String bondsHolder(int id){ 
         List<Security> bonds = securityRepository.findAll(); 
         String nameOfHolder = bonds.get(id).getHolderName(); 
-        return nameOfIssuer;
+        return nameOfHolder;
     } 
+
+    //end B.P
 
     @Override
     public void run(String... args) throws Exception {

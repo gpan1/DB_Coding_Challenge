@@ -53,7 +53,7 @@ public class BondsController {
     } 
 
     @GetMapping("/bonds/holder")
-    public String getBondsHolder(int id){
+    public String getBondsHolder(int id ){
         return bondsService.bondsHolder(int id);
     }
 
