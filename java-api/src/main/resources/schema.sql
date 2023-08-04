@@ -25,8 +25,8 @@ drop table if exists book_user;
 CREATE TABLE book_user (
   book_id int NOT NULL,
   users_id int NOT NULL,
-  FOREIGN KEY (users_ID) REFERENCES Users (ID),
-  FOREIGN KEY (book_ID) REFERENCES Book (ID)
+  FOREIGN KEY (users_id) REFERENCES Users (id),
+  FOREIGN KEY (book_id) REFERENCES Book (id)
 );
 
 drop table if exists security;
@@ -35,7 +35,7 @@ CREATE TABLE security (
   isin varchar(50) DEFAULT NULL,
   cusip varchar(50) DEFAULT NULL,
   issuer_name varchar(255) NOT NULL,
-  maturity_date datetime NOT NULL,
+  maturity_date varchar(255) NOT NULL,
   coupon float NOT NULL,
   type varchar(255) NOT NULL,
   face_value float NOT NULL,
@@ -55,12 +55,12 @@ CREATE TABLE trades (
   quantity int NOT NULL,
   unit_price float NOT NULL,
   buy_sell varchar(32) NOT NULL,
-  trade_date datetime NOT NULL,
-  settlement_date datetime NOT NULL,
+  trade_date varchar(255) NOT NULL,
+  settlement_date varchar(255) NOT NULL,
   PRIMARY KEY (id),
-  FOREIGN KEY (ID) REFERENCES Security (ID),
-  FOREIGN KEY (ID) REFERENCES Counterparty (ID),
-  FOREIGN KEY (ID) REFERENCES Book (ID)
+  FOREIGN KEY (id) REFERENCES Security (id),
+  FOREIGN KEY (id) REFERENCES Counterparty (id),
+  FOREIGN KEY (id) REFERENCES Book (id)
 );
 
 ALTER TABLE book_user ADD PRIMARY KEY(book_id, users_id);

@@ -17,5 +17,4 @@ public interface SecurityRepository extends JpaRepository<Security, Long> {
     // List<Security> findBondsByMaturityDateIn5Days();
    
     List<Security> findBondsByMaturityDate(String maturityDate); 
-
 }

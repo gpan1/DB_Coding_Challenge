@@ -1,29 +1,22 @@
 package com.db.grad.javaapi.service;
 
-import java.time.LocalDate;
-
-// import com.db.grad.javaapi.model.Trades;
-
-import org.springframework.boot.CommandLineRunner;
-
-import com.db.grad.javaapi.model.Security;
-import com.db.grad.javaapi.repository.SecurityRepository;
-// import com.db.grad.javaapi.repository.TradeRepository;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.util.*;
+import java.time.*;
+import com.db.grad.javaapi.model.Trades;
+import com.db.grad.javaapi.model.Security;
+import org.springframework.stereotype.Service;
+import org.springframework.boot.CommandLineRunner;
+import com.db.grad.javaapi.repository.TradeRepository;
+import com.db.grad.javaapi.repository.SecurityRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Service
 public class BondsService implements CommandLineRunner{
+    @Autowired
+    SecurityRepository securityRepository;
     
     @Autowired
-    private SecurityRepository securityRepository;
-
-//    @Autowired
-//    private TradeRepository tradeRepository;
-
+    private TradeRepository tradeRepository;
        
     public List<Security> getAllBonds(){
         return securityRepository.findAll();
@@ -34,56 +27,60 @@ public class BondsService implements CommandLineRunner{
     //     return bonds.get(2);
     // }
 
-    // public List<Security> getBondsDueForMaturity(String maturityDate) {
-    //     return securityRepository.findBondsByMaturityDate(maturityDate);
-    // }
+    public List<Security> getBondsDueForMaturity(String maturityDate) {
+        return securityRepository.findBondsByMaturityDate(maturityDate);
+    }
 
-    // public List<Security> bondsToMature(){ //look at next 5 days
-    //     List<Security> bonds = securityRepository.findAll();
-    //     List<Security> qualifying = new ArrayList<Security>();
-    //     LocalDate today = LocalDate.now(); //today's date
-    //     for (Security bond : bonds) {
-    //         if (LocalDate.parse(bond.getMaturityDate()).isBefore(today.plusDays(5))) {
-    //             qualifying.add(bond);
-    //         }
-    //     }
-    //     return qualifying;
-    // }
+    public List<Security> bondsToMature(){ //look at next 5 days
+        List<Security> bonds = securityRepository.findAll();
+        List<Security> qualifying = new ArrayList<Security>();
+        LocalDate today = LocalDate.now(); //today's date
+        for (Security bond : bonds) {
+            if (LocalDate.parse(bond.getMaturityDate()).isAfter(today) && LocalDate.parse(bond.getMaturityDate()).isBefore(today.plusDays(5))) {
+                qualifying.add(bond);
+            }
+        }
+        return qualifying;
+    }
 
-    // public List<Security> bondsMatured(){ //look at last 5 days
-    //     List<Security> bonds = securityRepository.findAll();
-    //     List<Security> qualifying = new ArrayList<Security>();
-    //     LocalDate today = LocalDate.now(); //today's date
-    //     for (Security bond : bonds) {
-    //         if (LocalDate.parse(bond.getMaturityDate()).isAfter(today.minusDays(5))) {
-    //             qualifying.add(bond);
-    //         }
-    //     }
-    //     return qualifying;
-    // }    
+    public List<Security> bondsMatured(){ //look at last 5 days
+        List<Security> bonds = securityRepository.findAll();
+        List<Security> qualifying = new ArrayList<Security>();
+        LocalDate today = LocalDate.now(); //today's date
+        for (Security bond : bonds) {
+            if (LocalDate.parse(bond.getMaturityDate()).isAfter(today.minusDays(5)) && LocalDate.parse(bond.getMaturityDate()).isBefore(today)) {
+                qualifying.add(bond);
+            }
+        }
+        return qualifying;
+    }    
 
-    // public List<Trades> bondsToBeSettled(){ //compare settlement date to today's date
-    //     List<Trades> trades = tradeRepository.findAll();
-    //     List<Trades> qualifying = new ArrayList<Trades>();
-    //     LocalDate today = LocalDate.now(); //today's date
-    //     for (Trades trade : trades) {
-    //         if (LocalDate.parse(trade.getSettlementDate()).isAfter(today)) {
-    //             qualifying.add(trade);
-    //         }
-    //     }
-    //     return qualifying;
-    // }
+    public List<Trades> bondsToBeSettled(){ //compare settlement date to today's date
+        List<Trades> trades = tradeRepository.findAll();
+        List<Trades> qualifying = new ArrayList<Trades>();
+        LocalDate today = LocalDate.now(); //today's date
+        for (Trades trade : trades) {
+            if (LocalDate.parse(trade.getSettlementDate()).isAfter(today)) {
+                qualifying.add(trade);
+            }
+        }
+        return qualifying;
+    }
 
     @Override
     public void run(String... args) throws Exception {
-        LocalDate date = LocalDate.now(); //today's date
-        if(LocalDate.parse("2023-08-03").isBefore(date.plusDays(5)) || LocalDate.parse("2023-08-03").isAfter(date.minusDays(5))){
-            System.out.println("checkpoint");
-        }
-        else System.out.println("not qualifying"); 
-        // System.out.println(qualifyingBonds("2023-08-03"));
+        System.out.println("checkpoint");
+        System.out.println(LocalDate.parse("2023-08-03"));
     }
 }
+
+
+// LocalDate date = LocalDate.now(); //today's date
+        // if(LocalDate.parse("2023-08-03").isBefore(date.plusDays(5)) || LocalDate.parse("2023-08-03").isAfter(date.minusDays(5))){
+        //     System.out.println("checkpoint");
+        // }
+        // else System.out.println("not qualifying"); 
+        // System.out.println(qualifyingBonds("2023-08-03"));
 
 // //given a date, show bonds that will mature in 5 days or have matured in the last 5 days
 //     public List<Security> qualifyingBonds(String maturityDate){

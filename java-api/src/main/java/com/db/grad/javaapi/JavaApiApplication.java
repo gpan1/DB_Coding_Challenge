@@ -1,29 +1,53 @@
 package com.db.grad.javaapi;
 
+import java.util.List;
 // import com.db.grad.javaapi.model.Book;
 import com.db.grad.javaapi.model.Security;
-import com.db.grad.javaapi.repository.SecurityRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
+import com.db.grad.javaapi.repository.BooksRepository;
+import com.db.grad.javaapi.repository.SecurityRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-// import com.db.grad.javaapi.repository.BooksRepository;
 
-import java.util.List;
 
 @SpringBootApplication
 // public class JavaApiApplication implements CommandLineRunner {
 public class JavaApiApplication {
+	
+	public static void main(String[] args) {
+		SpringApplication.run(JavaApiApplication.class, args);
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	// @Autowired
 	// BooksRepository booksRepository;
 
 	// @Autowired
 	// SecurityRepository securityRepository;
-
-	public static void main(String[] args) {
-		SpringApplication.run(JavaApiApplication.class, args);
-	}
 
 	// @Override
 	// public void run(String... args) throws Exception {
@@ -46,4 +70,4 @@ public class JavaApiApplication {
 	// 	// }
 	// }
 
-}
+// }
