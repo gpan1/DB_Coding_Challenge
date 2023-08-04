@@ -2,7 +2,7 @@ import { Navigate } from "react-router-dom"
 
 export const AuthChecker = (props) => { 
     
-    const token = false;
+    const token = true;
     
     const { auth=token, children, redirect = '/login' } = props; 
 
