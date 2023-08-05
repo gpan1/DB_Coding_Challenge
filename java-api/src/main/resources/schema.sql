@@ -59,9 +59,9 @@ CREATE TABLE trades (
   trade_date varchar(255) NOT NULL,
   settlement_date varchar(255) NOT NULL,
   PRIMARY KEY (id),
-  FOREIGN KEY (id) REFERENCES Security (id),
-  FOREIGN KEY (id) REFERENCES counterparty (id),
-  FOREIGN KEY (id) REFERENCES book (id)
+  FOREIGN KEY (security_id) REFERENCES Security (id),
+  FOREIGN KEY (counterparty_id) REFERENCES counterparty (id),
+  FOREIGN KEY (book_id) REFERENCES book (id)
 );
 
 ALTER TABLE book_user ADD PRIMARY KEY(book_id, users_id);
