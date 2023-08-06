@@ -117,7 +117,7 @@ public class BondsService implements CommandLineRunner{
         return qualifying; 
     }
 
-    //TODO - view the client name of the bond = bond holder
+    // view the client name of the bond = bond holder
         //given security_id as bond id, get counterparty_id from trades
         //given counterparty_id, get client_name from counterparties using counterparty_id
     public String viewClient(int id){ //view the client of the bond = bond holder
