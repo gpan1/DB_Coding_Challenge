@@ -28,6 +28,11 @@ public class BondsService implements CommandLineRunner{
         return securityRepository.findAll();
     }
 
+    public String viewIssuer(int id){ //view the issuer of the bond
+        List<Security> bonds = securityRepository.findAll();
+        return bonds.get(id).getIssuerName(); //0-indexed
+    }
+
     public Security getBondById(int id){
         List<Security> bonds = securityRepository.findAll();
         for (Security bond : bonds) {
@@ -66,7 +71,85 @@ public class BondsService implements CommandLineRunner{
         }
         return qualifying;
     }   
+
+    public List<Trade> bondsToBeSettled(){ //compare settlement date to today's date
+        List<Trade> trades = tradeRepository.findAll();
+        List<Trade> qualifying = new ArrayList<Trade>(); //trades to be settled
+        LocalDate today = LocalDate.now(); //today's date
+        for (Trade trade : trades) {
+            if (LocalDate.parse(trade.getSettlementDate()).isAfter(today)) {
+                qualifying.add(trade);
+            }
+        }
+        return qualifying;
+    }
     
+    public String bondsISINandCUSIP(int id){ //view a Bond’s ISIN and CUSIP code
+        List<Security> bonds = securityRepository.findAll();
+        Pair<String, String> isinAndCusip = new Pair<String, String>(bonds.get(id).getIsin(), bonds.get(id).getCusip()); //0-indexed
+        return "ISIN Code: " + isinAndCusip.getValue0() + "\n" + "CUSIP Code: " + isinAndCusip.getValue1();
+    }
+
+    // as a user I want to be able to see bonds in books I am responsible for
+        //user_id takes me to book_user which gives me book_id, go into trades and print corresponding bonds for that book_id with matching security_id
+        //get book_id from book_user where user_id = user_id
+        //get security_id from trades where book_id = book_id
+        //get bonds from securities where id = security_id
+    public List<Security> bondsInBooks(int user_id){
+        System.out.println("check 1");
+        List<BookUser> bookUsers = bookUserRepository.findAll(); 
+        List<Trade> trades = tradeRepository.findAll(); 
+        List<Security> bonds = securityRepository.findAll(); 
+        List<Security> qualifying = new ArrayList<Security>(); //bonds in books
+        for (BookUser bookUser : bookUsers) { //for each book_user
+            if (bookUser.getUsers_id().getId() == user_id) { 
+                for (Trade trade : trades) { 
+                    if (trade.getBook_id().getId() == bookUser.getBook_id().getId()) { 
+                        for (Security bond : bonds) {       
+                            if (bond.getId() == trade.getSecurity_id().getId()) { 
+                                qualifying.add(bond); 
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return qualifying; 
+    }
+
+    //TODO - view the client name of the bond = bond holder
+        //given security_id as bond id, get counterparty_id from trades
+        //given counterparty_id, get client_name from counterparties using counterparty_id
+    public String viewClient(int id){ //view the client of the bond = bond holder
+        List<Security> bonds = securityRepository.findAll();
+        List<Trade> trades = tradeRepository.findAll();
+        for (Security bond : bonds) {
+            if (bond.getId() == id) {
+                for (Trade trade : trades) {
+                    if (trade.getSecurity_id().getId() == bond.getId()) {
+                        return trade.getCounterparty_id().getName();
+                    }
+                }
+            }
+        }
+        return null;
+    }
+    
+    //TODO - show where almost mature bonds have been actioned by others (to prevent duplication of effort and allow oversight)
+
+    @Override
+    public void run(String... args) throws Exception {
+        System.out.println("*** testing ***");
+        System.out.println("*** convert string to date: " + LocalDate.parse("2023-08-03") + "***");
+        System.out.println("*** issuer: " + viewIssuer(0) + "***");
+        System.out.println(bondsISINandCUSIP(0));
+        // System.out.println(bondsMaturedAndMaturing());
+        System.out.println("*** bond by id: " + getBondById(1) + "***");
+        System.out.println("*** bonds in books: " + bondsInBooks(2) + "***");
+        System.out.println("*** counterparty: " + viewClient(1) + "***");
+    }
+}
+
     // public Pair<List<Security>, List<Security>> bondsMaturedAndMaturing(){  //mature and maturing bonds
     //     List<Security> bonds = securityRepository.findAll();
     //     List<Security> matured = new ArrayList<Security>();
@@ -83,72 +166,3 @@ public class BondsService implements CommandLineRunner{
     //     }
     //     return new Pair<List<Security>, List<Security>>(matured, maturing);
     // }
-
-    public List<Trade> bondsToBeSettled(){ //compare settlement date to today's date
-        List<Trade> trades = tradeRepository.findAll();
-        List<Trade> qualifying = new ArrayList<Trade>(); //trades to be settled
-        LocalDate today = LocalDate.now(); //today's date
-        for (Trade trade : trades) {
-            if (LocalDate.parse(trade.getSettlementDate()).isAfter(today)) {
-                qualifying.add(trade);
-            }
-        }
-        return qualifying;
-    }
-    
-    public String bondsISINandCUSIP(int id){ //view a Bond’s ISIN and CUSIP code
-        List<Security> bonds = securityRepository.findAll();
-        Pair<String, String> isinAndCusip = new Pair<String, String>(bonds.get(id).getIsin(), bonds.get(id).getCusip());
-        return "ISIN Code: " + isinAndCusip.getValue0() + "\n" + "CUSIP Code: " + isinAndCusip.getValue1();
-    }
-
-    // show where almost mature bonds have been actioned by others (to prevent duplication of effort and allow oversight)
-
-    // as a user I want to be able to see bonds in books I am responsible for
-        //user_id takes me to book_user which gives me book_id, go into trades and print corresponding bonds for that book_id with matching security_id
-    public List<Security> bondsInBooks(int user_id){
-        System.out.println("check 1");
-        List<BookUser> bookUsers = bookUserRepository.findAll(); 
-        List<Trade> trades = tradeRepository.findAll(); 
-        List<Security> bonds = securityRepository.findAll(); 
-        List<Security> qualifying = new ArrayList<Security>(); //bonds in books
-        //get book_id from book_user where user_id = user_id
-        //get security_id from trades where book_id = book_id
-        //get bonds from securities where id = security_id
-        System.out.println("check 2");
-        for (BookUser bookUser : bookUsers) { //for each book_user
-            System.out.println("check 3"); 
-            System.out.println("book user id: " + bookUser.getUsers_id().getId());
-            if (bookUser.getUsers_id().getId() == user_id) { 
-                System.out.println("check 4"); 
-                for (Trade trade : trades) { 
-                    System.out.println("trade book id: " + trade.getBook_id().getId());
-                    System.out.println("book user book id: " + bookUser.getBook_id().getId());
-                    if (trade.getBook_id().getId() == bookUser.getBook_id().getId()) { 
-                        System.out.println("check 5"); 
-                        for (Security bond : bonds) {       
-                            System.out.println("check 6");  
-                            System.out.println("bond id: " + bond.getId());                
-                            System.out.println("trade security id: " + trade.getSecurity_id().getId());
-                            if (bond.getId() == trade.getSecurity_id().getId()) { 
-                                qualifying.add(bond); 
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        return qualifying; 
-    }
-    
-    @Override
-    public void run(String... args) throws Exception {
-        System.out.println("Testing");
-        System.out.println(LocalDate.parse("2023-08-03"));
-        System.out.println(bondsISINandCUSIP(0));
-        // System.out.println(bondsMaturedAndMaturing());
-        System.out.println(getBondById(1));
-        // call bondsInBooks with user_id
-        System.out.println("bonds in books: " + bondsInBooks(1));
-    }
-}

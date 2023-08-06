@@ -28,6 +28,16 @@ public class BondsController {
         return bondsService.getBondById(id);
     }
 
+    @GetMapping("/bonds/issuer/{id}")
+    public String viewIssuer(@PathVariable int id){
+        return bondsService.viewIssuer(id);
+    }
+
+    @GetMapping("/bonds/view client/{id}")
+    public String getClientName(@PathVariable int id){
+        return bondsService.viewClient(id);
+    }
+
     @GetMapping("/bonds/maturing")
     public List<Security> getBondsMaturing(){
         return bondsService.bondsToBeMature();
@@ -38,11 +48,6 @@ public class BondsController {
         return bondsService.bondsMatured();
     }
 
-    // @GetMapping("/bonds/matured and maturing")
-    // public Pair<List<Security>, List<Security>> getBondsMaturedAndMaturing(){
-    //     return bondsService.bondsMaturedAndMaturing();
-    // }
-
     @GetMapping("/bonds/to be settled")
     public List<Trade> getBondsToBeSettled(){
         return bondsService.bondsToBeSettled();
@@ -52,4 +57,14 @@ public class BondsController {
     public String getBondsISINandCUSIP(@PathVariable int id){
         return bondsService.bondsISINandCUSIP(id);
     }
+
+    @GetMapping("/bonds/bonds in book/{id}")
+    public List<Security> getBondsByBook(@PathVariable int id){
+        return bondsService.bondsInBooks(id);
+    }
+
+    // @GetMapping("/bonds/matured and maturing")
+    // public Pair<List<Security>, List<Security>> getBondsMaturedAndMaturing(){
+    //     return bondsService.bondsMaturedAndMaturing();
+    // }
 }
