@@ -24,7 +24,6 @@ public class Security {
     private String currency;
     private String status;
 
-    @Id
     @Column(name="id", nullable=false)
     public int getId(){
         return id;

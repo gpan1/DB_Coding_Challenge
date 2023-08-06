@@ -16,7 +16,6 @@ public class CounterParty {
     
     private String name;
 
-    @Id
     @Column(name="id", nullable=false)
     public long getId(){
         return id;

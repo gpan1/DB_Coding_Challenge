@@ -7,7 +7,6 @@ import java.io.Serializable;
 @Table(name="book_user")
 @IdClass(BookUser.class) // composite key
 public class BookUser implements Serializable{
-    // primary key is a composite key of book_id and users_id
     @Id
     @ManyToOne // many book_user to one book
     @JoinColumn(name="book_id", nullable=false)
