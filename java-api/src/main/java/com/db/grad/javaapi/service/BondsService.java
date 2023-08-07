@@ -117,7 +117,7 @@ public class BondsService implements CommandLineRunner{
                 }
             }
         }
-        return qualifying; 
+        return new ArrayList<>(new HashSet<>(qualifying));
     }
 
     // view the issuer and client(bond holder) of a bond
