@@ -5,6 +5,9 @@ package com.db.grad.javaapi.model;
 @Entity
 @Table(name="login")
 public class Login {
+    @Column(name="name", nullable=false)
+    private String name;
+
     @Id
     @Column(name="email", nullable=false)
     private String email;
@@ -12,15 +15,24 @@ public class Login {
     @Column(name="password", nullable=false)
     private String password;
 
-    public String getEmail(){
-        return email;
-    }
-
     public Login(){}
 
-    public Login(String email, String password){
+    public Login(String name, String email, String password){
+        this.name = name;
         this.email = email;
         this.password = password;
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public void setName(String name){
+        this.name = name;
+    }
+
+    public String getEmail(){
+        return email;
     }
 
     public void setEmail(String email){
@@ -38,7 +50,8 @@ public class Login {
     @Override
     public String toString() {
         return "Login{" +
-                "email='" + email + '\'' +
+                "name='" + name + '\'' +
+                ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 '}';
     }

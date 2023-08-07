@@ -40,7 +40,7 @@ INSERT INTO book_user (book_id, users_id) VALUES (4, 11);
 
 --LOGIN table insertions
 
-insert into login (email, password) values ('AcmeCo@email.com', '$2a$10$DkNF/jUEdV5skZe3r1CSRe5XNOucWMu7jT6lcyOzgbdQ8Q5HJknNO');
+insert into login (name, email, password) values ('Acme co', 'AcmeCo@email.com', '$2a$10$DkNF/jUEdV5skZe3r1CSRe5XNOucWMu7jT6lcyOzgbdQ8Q5HJknNO');
 
 
 --COUNTERPARTY table insertions

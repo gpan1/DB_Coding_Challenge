@@ -1,8 +1,11 @@
 package com.db.grad.javaapi.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.javatuples.Pair;
 import com.db.grad.javaapi.model.Trade;
+import com.db.grad.javaapi.model.Login;
 import com.db.grad.javaapi.model.Security;
 import com.db.grad.javaapi.service.BondsService;
 import org.springframework.web.bind.annotation.*;
@@ -59,10 +62,21 @@ public class BondsController {
         return bondsService.bondsISINandCUSIP(bond_id);
     }
 
-    @PostMapping("/bonds/add_a_user/{email}/{password}")
-    public void addUser(@PathVariable String email, @PathVariable String password){
-        bondsService.addUser(email, password);
+    @PostMapping("/bonds/add_a_user/{name}/{email}/{password}")
+    @ResponseBody 
+    public void addUser(@RequestParam String name, @RequestParam String email, @RequestParam String password){
+        bondsService.addUser(name, email, password);
     }
+    // public Login getUser(@PathVariable String name, @PathVariable String email, @PathVariable Login password) {
+    //     Map<String, Login> login = new HashMap<>();
+    //     login.put("login", new Login("name", "email", "password"));
+    //     return login.get("login");
+    // }
+
+    // @PostMapping("/bonds/add_a_user/{name}/{email}/{password}")
+    // public void addUser(@PathVariable String name, @PathVariable String email, @PathVariable String password){
+    //     bondsService.addUser(name, email, password);
+    // }
 
     // @GetMapping("/bonds/to_be_settled")
     // public List<Trade> getBondsToBeSettled(){

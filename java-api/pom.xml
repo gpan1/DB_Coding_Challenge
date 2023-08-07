@@ -16,6 +16,11 @@
 	<description>Demo project for Spring Boot REST API with database</description>
 	<dependencies>
 		<dependency>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+		<dependency>
 			<groupId>org.javatuples</groupId>
 			<artifactId>javatuples</artifactId>
 			<version>1.2</version>

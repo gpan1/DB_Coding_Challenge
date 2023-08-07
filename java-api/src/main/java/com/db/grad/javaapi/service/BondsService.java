@@ -4,10 +4,13 @@ import java.util.*;
 import java.time.LocalDate;
 import org.javatuples.Pair;
 import com.db.grad.javaapi.model.Trade;
+import com.db.grad.javaapi.model.User;
 import com.db.grad.javaapi.model.BookUser;
 import com.db.grad.javaapi.model.Login;
 import com.db.grad.javaapi.model.Security;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.boot.CommandLineRunner;
 import com.db.grad.javaapi.repository.TradeRepository;
 import com.db.grad.javaapi.repository.UserRepository;
@@ -145,15 +148,16 @@ public class BondsService implements CommandLineRunner{
         return null;
     }
 
-    public void addUser(String email, String password){
-        Login user = new Login(email, password);
+    public Login addUser(String name, String email, String password){
+        Login user = new Login(name, email, password);
         loginRepository.save(user);
+        return user;
     }
 
     @Override
     public void run(String... args) throws Exception {
         System.out.println("*** Testing ***");
-        System.out.println("*** bonds to be mature: " + bondsToBeMature("2021-08-09") + "***");
+        // System.out.println("*** bonds to be mature: " + bondsToBeMature("2021-08-09") + "***");
         // System.out.println("*** bonds matured: " + bondsMatured("2021-08-10") + "***");
         // System.out.println("*** convert string to date: " + LocalDate.parse("2023-08-03") + "***");
         // System.out.println(bondsISINandCUSIP(0)); //0-indexed
