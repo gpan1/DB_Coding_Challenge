@@ -4,12 +4,16 @@ import java.util.*;
 import java.time.LocalDate;
 import org.javatuples.Pair;
 import com.db.grad.javaapi.model.Trade;
+import com.db.grad.javaapi.model.User;
 import com.db.grad.javaapi.model.BookUser;
+import com.db.grad.javaapi.model.Login;
 import com.db.grad.javaapi.model.Security;
 import org.springframework.stereotype.Service;
 import org.springframework.boot.CommandLineRunner;
 import com.db.grad.javaapi.repository.TradeRepository;
+import com.db.grad.javaapi.repository.UserRepository;
 import com.db.grad.javaapi.repository.BookUserRepository;
+import com.db.grad.javaapi.repository.LoginRepository;
 import com.db.grad.javaapi.repository.SecurityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -19,10 +23,16 @@ public class BondsService implements CommandLineRunner{
     SecurityRepository securityRepository;
     
     @Autowired
-    private TradeRepository tradeRepository;
+    TradeRepository tradeRepository;
 
     @Autowired
-    private BookUserRepository bookUserRepository;
+    BookUserRepository bookUserRepository;
+
+    @Autowired
+    UserRepository userRepository;
+
+    @Autowired
+    LoginRepository loginRepository;
        
     public List<Security> getAllBonds(){
         return securityRepository.findAll();
@@ -131,6 +141,21 @@ public class BondsService implements CommandLineRunner{
     
     //TODO - show where almost mature bonds have been actioned by others (to prevent duplication of effort and allow oversight)
 
+    public String getPassword(String email){
+        List<Login> login = loginRepository.findAll();
+        for (Login user : login) {
+            if (user.getEmail().equals(email)) {
+                return user.getPassword(); 
+            }
+        }
+        return null;
+    }
+
+    public void addUser(String email, String password){
+        Login user = new Login(email, password);
+        loginRepository.save(user);
+    }
+
     @Override
     public void run(String... args) throws Exception {
         System.out.println("*** testing ***");
@@ -142,7 +167,7 @@ public class BondsService implements CommandLineRunner{
         System.out.println("*** bond by id: " + getBondById(1) + "***"); //1-indexed
         System.out.println("*** bonds in books: " + bondsInBooks(2) + "***"); //1-indexed
         System.out.println("*** counterparty: " + viewIssuerAndClient(1) + "***"); //0-indexed, 1-indexed
-        
+        System.out.println("*** user: " + getPassword("AcmeCo@email.com"));
     }
 }
 

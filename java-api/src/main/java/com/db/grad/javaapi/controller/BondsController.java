@@ -3,6 +3,7 @@ package com.db.grad.javaapi.controller;
 import java.util.List;
 import org.javatuples.Pair;
 import com.db.grad.javaapi.model.Trade;
+import com.db.grad.javaapi.model.User;
 import com.db.grad.javaapi.model.Security;
 import com.db.grad.javaapi.service.BondsService;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,16 @@ public class BondsController {
     @GetMapping("/bonds/testing")
     public String getBond(){
         return bondsService.getBond();
+    }
+
+    @GetMapping("/bonds/get a user/{email}")
+    public String viewUser(@PathVariable String email){ //get user by email (primary key
+        return bondsService.getPassword(email);
+    }
+
+    @PostMapping("/bonds/add a user/{email}/{password}")
+    public void addUser(@PathVariable String email, @PathVariable String password){
+        bondsService.addUser(email, password);
     }
 
     @GetMapping("/bonds/all")

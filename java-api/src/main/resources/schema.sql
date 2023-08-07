@@ -4,6 +4,7 @@ drop table if exists book_user;
 drop table if exists counterparty;
 drop table if exists book;
 drop table if exists users;
+drop table if exists login;
 
 CREATE TABLE book (
   id int NOT NULL AUTO_INCREMENT,
@@ -17,6 +18,12 @@ CREATE TABLE users (
   email varchar(255) NOT NULL,
   role varchar(255) NOT NULL,
   PRIMARY KEY (id)
+);
+
+create table login (
+  email varchar(255) not null,
+  password varchar(255) not null,
+  primary key (email)
 );
 
 CREATE TABLE counterparty (
