@@ -1,11 +1,17 @@
+drop table if exists trades;
+drop table if exists security;
+drop table if exists book_user;
+drop table if exists counterparty;
 drop table if exists book;
+drop table if exists users;
+drop table if exists login;
+
 CREATE TABLE book (
   id int NOT NULL AUTO_INCREMENT,
   name varchar(255) NOT NULL,
   PRIMARY KEY (id)
 );
 
-drop table if exists users;
 CREATE TABLE users (
   id int NOT NULL AUTO_INCREMENT,
   name varchar(255) NOT NULL,
@@ -14,22 +20,25 @@ CREATE TABLE users (
   PRIMARY KEY (id)
 );
 
-drop table if exists counterparty;
+create table login (
+  email varchar(255) not null,
+  password varchar(255) not null,
+  primary key (email)
+);
+
 CREATE TABLE counterparty (
   id int NOT NULL AUTO_INCREMENT,
   name varchar(255) NOT NULL,
   PRIMARY KEY (id)
 );
 
-drop table if exists book_user;
 CREATE TABLE book_user (
   book_id int NOT NULL,
   users_id int NOT NULL,
-  FOREIGN KEY (users_id) REFERENCES Users (id),
-  FOREIGN KEY (book_id) REFERENCES Book (id)
+  FOREIGN KEY (users_id) REFERENCES users (id),
+  FOREIGN KEY (book_id) REFERENCES book (id)
 );
 
-drop table if exists security;
 CREATE TABLE security (
   id int NOT NULL AUTO_INCREMENT,
   isin varchar(50) DEFAULT NULL,
@@ -44,11 +53,10 @@ CREATE TABLE security (
   PRIMARY KEY (id)
 );
 
-drop table if exists trades;
 CREATE TABLE trades (
   id int NOT NULL AUTO_INCREMENT,
   book_id int NOT NULL,
-  security_id int NOT NULL,
+  security_id varchar(50) NOT NULL,
   counterparty_id int NOT NULL,
   currency varchar(10) NOT NULL,
   status varchar(32) NOT NULL,
@@ -58,9 +66,9 @@ CREATE TABLE trades (
   trade_date varchar(255) NOT NULL,
   settlement_date varchar(255) NOT NULL,
   PRIMARY KEY (id),
-  FOREIGN KEY (id) REFERENCES Security (id),
-  FOREIGN KEY (id) REFERENCES Counterparty (id),
-  FOREIGN KEY (id) REFERENCES Book (id)
+  FOREIGN KEY (security_id) REFERENCES Security (id),
+  FOREIGN KEY (counterparty_id) REFERENCES counterparty (id),
+  FOREIGN KEY (book_id) REFERENCES book (id)
 );
 
 ALTER TABLE book_user ADD PRIMARY KEY(book_id, users_id);
