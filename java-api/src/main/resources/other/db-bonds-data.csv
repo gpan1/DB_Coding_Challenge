@@ -27,3 +27,4 @@ id ,trade_type,trade_currency,quantity,trade_settlement_date,trade_status,trade_
 26,buy,USD,300,23/08/2021,open,23/08/2012,98.76,1.123,USD,87973RAA8,340,IE00B29LNP31,First Norway Alpha Kl.IV,22/12/2030,active,SOVN,Trading_book_4,Zurich Pension fund 4
 27,buy,USD,300,27/09/2021,open,4/2/2013,98.76,1.123,USD,87973RAA8,340,IE00B29LNP31,First Norway Alpha Kl.IV,22/12/2030,active,SOVN,Trading_book_4,Zurich Pension fund 4
 28,sell,USD,300,23/08/2021,open,23/08/2015,98.76,1.123,USD,87973RAA8,340,IE00B29LNP31,First Norway Alpha Kl.IV,22/12/2030,active,SOVN,Trading_book_4,Zurich Pension fund 4
+,,,,,,,,,,,,,,,,,,
