@@ -1,0 +1,24 @@
+.Pets{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+ 
+table {
+    border: 2px solid #0018a8;
+    width: 100%;
+    height: auto;
+    text-align: center;
+}
+ 
+th {
+    border-bottom: 1px solid #0018a8;
+    width:auto;
+}
+ 
+td {
+    text-align: center;
+    width: auto;
+}
