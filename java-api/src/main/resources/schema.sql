@@ -49,7 +49,7 @@ CREATE TABLE security (
 CREATE TABLE trades (
   id int NOT NULL AUTO_INCREMENT,
   book_id int NOT NULL,
-  security_id int NOT NULL,
+  security_id varchar(50) NOT NULL,
   counterparty_id int NOT NULL,
   currency varchar(10) NOT NULL,
   status varchar(32) NOT NULL,
