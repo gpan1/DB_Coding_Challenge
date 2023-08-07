@@ -81,7 +81,7 @@ public class BondsService implements CommandLineRunner{
         List<Trade> trades = tradeRepository.findAll();
         List<Trade> qualifying = new ArrayList<Trade>(); //trades to be settled
         for (Trade trade : trades) {
-            if (LocalDate.parse(trade.getSettlementDate()).isAfter(LocalDate.parse(date).minusDays(1))) {
+            if (LocalDate.parse(trade.getSettlementDate()).isAfter(LocalDate.parse(date))) {
                 qualifying.add(trade);
             }
         }
