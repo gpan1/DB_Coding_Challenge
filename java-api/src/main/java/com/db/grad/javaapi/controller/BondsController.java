@@ -52,8 +52,13 @@ public class BondsController {
         return bondsService.bondsToBeSettled(date);
     }
 
+    // @GetMapping("/bonds/view_issuer_and_client/{bond_id}")
+    // public Pair<String, String> getIssuerAndClient(@PathVariable int bond_id){
+    //     return bondsService.viewIssuerAndClient(bond_id);
+    // }
+
     @GetMapping("/bonds/view_issuer_and_client/{bond_id}")
-    public Pair<String, String> getIssuerAndClient(@PathVariable int bond_id){
+    public String getIssuerAndClient(@PathVariable int bond_id){
         return bondsService.viewIssuerAndClient(bond_id);
     }
 

@@ -123,14 +123,28 @@ public class BondsService implements CommandLineRunner{
     // view the issuer and client(bond holder) of a bond
         //given security_id as bond id, get counterparty_id from trades
         //given counterparty_id, get client_name from counterparties using counterparty_id
-    public Pair<String, String> viewIssuerAndClient(int id){ //view the client of the bond = bond holder
+    // public Pair<String, String> viewIssuerAndClient(int id){ //view the client of the bond = bond holder
+    //     List<Security> bonds = securityRepository.findAll();
+    //     List<Trade> trades = tradeRepository.findAll();
+    //     for (Security bond : bonds) {
+    //         if (bond.getId() == id) {
+    //             for (Trade trade : trades) {
+    //                 if (trade.getSecurity_id().getId() == bond.getId()) {
+    //                     return new Pair<String, String>(bonds.get(id).getIssuerName(), trade.getCounterparty_id().getName());
+    //                 }
+    //             }
+    //         }
+    //     }
+    //     return null;
+    // }
+    public String viewIssuerAndClient(int id){ //view the client of the bond = bond holder
         List<Security> bonds = securityRepository.findAll();
         List<Trade> trades = tradeRepository.findAll();
         for (Security bond : bonds) {
             if (bond.getId() == id) {
                 for (Trade trade : trades) {
                     if (trade.getSecurity_id().getId() == bond.getId()) {
-                        return new Pair<String, String>(bonds.get(id).getIssuerName(), trade.getCounterparty_id().getName());
+                        return trade.getCounterparty_id().getName(); //client name
                     }
                 }
             }
