@@ -13,34 +13,9 @@ public class BondsController {
     @Autowired
     BondsService bondsService;
 
-    @GetMapping("/bonds/get a user/{email}")
-    public String viewUser(@PathVariable String email){ //get user by email (primary key
-        return bondsService.getPassword(email);
-    }
-
-    @PostMapping("/bonds/add a user/{email}/{password}")
-    public void addUser(@PathVariable String email, @PathVariable String password){
-        bondsService.addUser(email, password);
-    }
-
     @GetMapping("/bonds/all")
     public List<Security> getAllBonds(){
         return bondsService.getAllBonds();
-    }
-
-    @GetMapping("/bonds/maturing")
-    public List<Security> getBondsMaturing(){
-        return bondsService.bondsToBeMature();
-    }
-
-    @GetMapping("/bonds/matured")
-    public List<Security> getBondsMatured(){
-        return bondsService.bondsMatured();
-    }
-
-    @GetMapping("/bonds/to be settled")
-    public List<Trade> getBondsToBeSettled(){
-        return bondsService.bondsToBeSettled();
     }
 
     @GetMapping("/bonds/{id}")
@@ -48,20 +23,60 @@ public class BondsController {
         return bondsService.getBondById(id);
     }
 
+    @GetMapping("/bonds/get_a_user/{email}")
+    public String viewUser(@PathVariable String email){ 
+        return bondsService.getPassword(email);
+    }
+
+    @GetMapping("/bonds/bonds_in_book/{id}")
+    public List<Security> getBondsByBook(@PathVariable int id){
+        return bondsService.bondsInBooks(id);
+    }
+
+    @GetMapping("/bonds/{matured}")
+    public List<Security> getBondsMatured(@PathVariable String date){
+        return bondsService.bondsMatured(date);
+    }
+
+    @GetMapping("/bonds/{maturing}")
+    public List<Security> getBondsMaturing(@PathVariable String date){
+        return bondsService.bondsToBeMature(date);
+    }
+
+    @GetMapping("/bonds/to_be_settled/{id}")
+    public List<Trade> getBondsToBeSettled(@PathVariable String date){
+        return bondsService.bondsToBeSettled(date);
+    }
+
+    @GetMapping("/bonds/view_issuer_and_client/{id}")
+    public Pair<String, String> getIssuerAndClient(@PathVariable int id){
+        return bondsService.viewIssuerAndClient(id);
+    }
+
     @GetMapping("/bonds/ISINandCUSIP/{id}")
     public Pair<String, String> getBondsISINandCUSIP(@PathVariable int id){
         return bondsService.bondsISINandCUSIP(id);
     }
 
-    @GetMapping("/bonds/bonds in book/{id}")
-    public List<Security> getBondsByBook(@PathVariable int id){
-        return bondsService.bondsInBooks(id);
+    @PostMapping("/bonds/add_a_user/{email}/{password}")
+    public void addUser(@PathVariable String email, @PathVariable String password){
+        bondsService.addUser(email, password);
     }
 
-    @GetMapping("/bonds/view issuer and client/{id}")
-    public Pair<String, String> getIssuerAndClient(@PathVariable int id){
-        return bondsService.viewIssuerAndClient(id);
-    }
+    // @GetMapping("/bonds/to_be_settled")
+    // public List<Trade> getBondsToBeSettled(){
+    //     return bondsService.bondsToBeSettled();
+    // }
+
+    // @GetMapping("/bonds/maturing")
+    // public List<Security> getBondsMaturing(){
+    //     return bondsService.bondsToBeMature();
+    // }
+
+    // @GetMapping("/bonds/matured")
+    // public List<Security> getBondsMatured(){
+    //     return bondsService.bondsMatured();
+    // }
 
     // @GetMapping("/bonds/issuer name/{id}")
     // public String viewIssuer(@PathVariable int id){
