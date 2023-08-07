@@ -16,9 +16,7 @@ public class Login {
         return email;
     }
 
-    public Login(){
-
-    }
+    public Login(){}
 
     public Login(String email, String password){
         this.email = email;

@@ -3,7 +3,6 @@ package com.db.grad.javaapi.controller;
 import java.util.List;
 import org.javatuples.Pair;
 import com.db.grad.javaapi.model.Trade;
-import com.db.grad.javaapi.model.User;
 import com.db.grad.javaapi.model.Security;
 import com.db.grad.javaapi.service.BondsService;
 import org.springframework.web.bind.annotation.*;
@@ -13,11 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class BondsController {
     @Autowired
     BondsService bondsService;
-
-    @GetMapping("/bonds/testing")
-    public String getBond(){
-        return bondsService.getBond();
-    }
 
     @GetMapping("/bonds/get a user/{email}")
     public String viewUser(@PathVariable String email){ //get user by email (primary key
@@ -34,11 +28,6 @@ public class BondsController {
         return bondsService.getAllBonds();
     }
 
-    @GetMapping("/bonds/{id}")
-    public Security getBondById(@PathVariable int id){
-        return bondsService.getBondById(id);
-    }
-
     @GetMapping("/bonds/maturing")
     public List<Security> getBondsMaturing(){
         return bondsService.bondsToBeMature();
@@ -52,6 +41,11 @@ public class BondsController {
     @GetMapping("/bonds/to be settled")
     public List<Trade> getBondsToBeSettled(){
         return bondsService.bondsToBeSettled();
+    }
+
+    @GetMapping("/bonds/{id}")
+    public Security getBondById(@PathVariable int id){
+        return bondsService.getBondById(id);
     }
 
     @GetMapping("/bonds/ISINandCUSIP/{id}")

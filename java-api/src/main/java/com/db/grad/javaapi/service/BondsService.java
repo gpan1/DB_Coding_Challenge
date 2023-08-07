@@ -4,7 +4,6 @@ import java.util.*;
 import java.time.LocalDate;
 import org.javatuples.Pair;
 import com.db.grad.javaapi.model.Trade;
-import com.db.grad.javaapi.model.User;
 import com.db.grad.javaapi.model.BookUser;
 import com.db.grad.javaapi.model.Login;
 import com.db.grad.javaapi.model.Security;
@@ -139,8 +138,6 @@ public class BondsService implements CommandLineRunner{
         return null;
     }
     
-    //TODO - show where almost mature bonds have been actioned by others (to prevent duplication of effort and allow oversight)
-
     public String getPassword(String email){
         List<Login> login = loginRepository.findAll();
         for (Login user : login) {
@@ -156,18 +153,20 @@ public class BondsService implements CommandLineRunner{
         loginRepository.save(user);
     }
 
+    //TODO - show where almost mature bonds have been actioned by others (to prevent duplication of effort and allow oversight)
+
     @Override
     public void run(String... args) throws Exception {
-        System.out.println("*** testing ***");
-        System.out.println("*** convert string to date: " + LocalDate.parse("2023-08-03") + "***");
-        System.out.println(bondsISINandCUSIP(0)); //0-indexed
+        System.out.println("*** Testing ***");
+        // System.out.println("*** convert string to date: " + LocalDate.parse("2023-08-03") + "***");
+        // System.out.println(bondsISINandCUSIP(0)); //0-indexed
         // System.out.println(bondsMaturedAndMaturing());
         // System.out.println("*** issuer: " + viewIssuer(1) + "***"); //0-indexed
         // System.out.println("*** client: " + viewClient(1) + "***"); //1-indexed
-        System.out.println("*** bond by id: " + getBondById(1) + "***"); //1-indexed
-        System.out.println("*** bonds in books: " + bondsInBooks(2) + "***"); //1-indexed
-        System.out.println("*** counterparty: " + viewIssuerAndClient(1) + "***"); //0-indexed, 1-indexed
-        System.out.println("*** user: " + getPassword("AcmeCo@email.com"));
+        // System.out.println("*** bond by id: " + getBondById(1) + "***"); //1-indexed
+        // System.out.println("*** bonds in books: " + bondsInBooks(2) + "***"); //1-indexed
+        // System.out.println("*** counterparty: " + viewIssuerAndClient(1) + "***"); //0-indexed, 1-indexed
+        // System.out.println("*** password: " + getPassword("AcmeCo@email.com"));
     }
 }
 
