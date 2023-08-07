@@ -70,7 +70,7 @@ public class BondsService implements CommandLineRunner{
         List<Security> bonds = securityRepository.findAll();
         List<Security> qualifying = new ArrayList<Security>(); //matured bonds
         for (Security bond : bonds) {
-            if (LocalDate.parse(bond.getMaturityDate()).isAfter(LocalDate.parse(date).minusDays(5)) && LocalDate.parse(bond.getMaturityDate()).isBefore(LocalDate.parse(date).plusDays(1))) {
+            if (LocalDate.parse(bond.getMaturityDate()).isAfter(LocalDate.parse(date).minusDays(5)) && LocalDate.parse(bond.getMaturityDate()).isBefore(LocalDate.parse(date))) {
                 qualifying.add(bond);
             }
         }
