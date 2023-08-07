@@ -1,18 +1,44 @@
 import React, { useState, useEffect } from "react";
-import { findBonds } from "../../services/BondServices";
+import { bondsAndBooks } from "../../services/BondServices";
 import "./Bonds.module.css";
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/esm/Button';
+import Row from 'react-bootstrap/Row';
 
-export const Bonds = () => {
+export const BondsAndBooks = () => {
     const [bonds, setBonds] = useState([]);
+    const [id, setId] = useState(0);
+    const [id2, setId2] = useState(null);
+    const handleId = (event)=>{
+        setId(event.target.value)
+    }
+
+    const handleSubmit =(event)=>{
+        event.preventDefault();
+        setId2(id);
+    }
 
     useEffect(() => {
-      findBonds()
+        if(id2 != null){
+            bondsAndBooks(id2)
             .then(({data}) => {
             setBonds(data);
-            });
-    }, []);
+            });}
+    }, [id2]);
   return (
     <>
+    <Row className='bondForm'>
+        <Form>
+            <Form.Group className="mb-3" controlId="userid">
+                <Form.Label>User Id: </Form.Label>
+                <Form.Control type="text" placeholder="User Id" value={id}
+                onChange={handleId} />
+            </Form.Group>
+            <Button variant="primary" type="submit" onClick={handleSubmit}>
+                Submit
+            </Button>
+        </Form>
+    </Row>
       <table>
       <tbody>
         <tr>
@@ -26,7 +52,7 @@ export const Bonds = () => {
             <th>Currency</th>
             <th>Status</th>
         </tr>
-            {bonds.map((bond, key) => {
+        {bonds.map((bond, key) => {
               return (
                   <tr key={key}>
                     <td>{bond.isin}</td>

@@ -1,15 +1,18 @@
 import React from 'react';
 import { useState} from 'react';
 import { login, signup } from "../services/BondServices";
+import Cookies from 'js-cookie';
+import { useNavigate } from "react-router-dom";
 const bcrypt = require('bcryptjs');
 var salt = bcrypt.genSaltSync(10);
 // import logo from '../images/Deutsche_Bank_logo.png';
 
-export default function LoginPage(props) {
+export default function LoginPage() {
     let [authMode, setAuthMode] = useState("signin");
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
+    const navigate = useNavigate();
 
     const handleUsername = (event)=>{
       setUsername(event.target.value)
@@ -29,13 +32,17 @@ export default function LoginPage(props) {
 
     const handleSubmitSignIn = async (event)=>{
       event.preventDefault();
-      let user = {};
       let hashedPass = await login(username);
-      console.log(hashedPass);
-      console.log(bcrypt.compareSync(password, hashedPass.data.toString()));
-      user.username = username;
-      user.password = hashedPass.data;
-      console.log(user);      
+      var inFifteenMinutes = new Date(new Date().getTime() + 15 * 60 * 1000);
+      if(bcrypt.compareSync(password, hashedPass.data.toString())){
+        Cookies.set("token", 'Gavin is Cool', {
+          expires: inFifteenMinutes
+      });
+      navigate("/");
+      }
+      else{
+        window.location.reload(false);
+      }
   }
   const handleSubmitSignup = async (event)=>{
     event.preventDefault();
@@ -43,7 +50,7 @@ export default function LoginPage(props) {
     user.username = username;
     user.password = bcrypt.hashSync(password, salt);
     user.name = name;
-    let sign = await signup(username, user.password);
+    let sign = await signup(name, username, user.password);
     console.log(sign);
     console.log(user);      
 }

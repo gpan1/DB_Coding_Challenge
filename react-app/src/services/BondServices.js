@@ -6,13 +6,13 @@ export const findBonds = () => {
   return bonds;
 };
 
-export const findMatureBonds = () => {
-  const bonds = axios.get(`${hostNameUrl}/matured`);
+export const findMatureBonds = (date) => {
+  const bonds = axios.get(`${hostNameUrl}/view_matured${date}`);
   return bonds;
 };
 
-export const findMaturingBonds = () => {
-  const bonds = axios.get(`${hostNameUrl}/maturing`);
+export const findMaturingBonds = (date) => {
+  const bonds = axios.get(`${hostNameUrl}/view_maturing${date}`);
   return bonds;
 };
 
@@ -21,7 +21,27 @@ export const login = (email) => {
   return bonds;
 };
 
-export const signup = (email, password) => {
-  const bonds = axios.post(`${hostNameUrl}/add_a_user/${email}/${password}`);
+export const signup = (name, email, password) => {
+  const bonds = axios.post(`${hostNameUrl}/add_a_user/${name}/${email}/${password}`);
+  return bonds;
+};
+
+export const bondById = (id) => {
+  const bonds = axios.get(`${hostNameUrl}/${id}`);
+  return bonds;
+};
+
+export const clientByBondId = (id) => {
+  const bonds = axios.get(`${hostNameUrl}/view_issuer_and_client/${id}`);
+  return bonds;
+};
+
+export const settlingBonds = (date) => {
+  const bonds = axios.get(`${hostNameUrl}/to_be_settled/${date}`);
+  return bonds;
+};
+
+export const bondsAndBooks = (id) => {
+  const bonds = axios.get(`${hostNameUrl}/bonds_in_book/${id}`);
   return bonds;
 };

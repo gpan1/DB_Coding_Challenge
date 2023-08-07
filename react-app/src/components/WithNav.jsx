@@ -18,8 +18,12 @@ export const withNav = () => {
                 <Nav className="me-auto">
                   <Nav.Link href="/allbonds">All Bonds</Nav.Link>
                   <Nav.Link href="/matureBonds">Due For Maturity</Nav.Link>
+                  <Nav.Link href="/settlingBonds">Settling Bonds</Nav.Link>
+                  <Nav.Link href="/bondById">Search Bond</Nav.Link>
+                  <Nav.Link href="/bondsAndBooks">Bonds in Books</Nav.Link>
+                  <Nav.Link href="/clientId">View Client</Nav.Link>
                   <Nav.Link href="/addBond">Add Bond</Nav.Link>
-                  <Nav.Link href="/login">Login (Testing)</Nav.Link>
+                  <Nav.Link href="/logout">Log out</Nav.Link>
                 </Nav>
               </Navbar.Collapse>
             </Container>
