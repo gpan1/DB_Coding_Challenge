@@ -10,7 +10,7 @@
     flex-direction: column;
   }
   .navbar .navbar-nav {
-    border-bottom: 2px solid #000;
+    border-bottom: 2px solid #0018a8;
   }
   .navbar .nav-item {
     padding: 0.5em 1em;
@@ -19,7 +19,7 @@
 }
 .navbar .navbar-nav {
   margin-top: 0.5em;
-  border-top: 2px solid #000;
+  border-top: 2px solid #0018a8;
 }
 
 img {

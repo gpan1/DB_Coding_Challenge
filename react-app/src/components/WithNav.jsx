@@ -17,9 +17,9 @@ export const withNav = () => {
               <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
                   <Nav.Link href="/allbonds">All Bonds</Nav.Link>
-                  <Nav.Link href="/matureBonds">All Bonds Due For Maturity</Nav.Link>
+                  <Nav.Link href="/matureBonds">Due For Maturity</Nav.Link>
                   <Nav.Link href="/addBond">Add Bond</Nav.Link>
-                  <Nav.Link href="/login">Login(Testing)</Nav.Link>
+                  <Nav.Link href="/login">Login (Testing)</Nav.Link>
                 </Nav>
               </Navbar.Collapse>
             </Container>
