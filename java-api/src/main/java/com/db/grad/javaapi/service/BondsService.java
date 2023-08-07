@@ -28,11 +28,6 @@ public class BondsService implements CommandLineRunner{
         return securityRepository.findAll();
     }
 
-    public String viewIssuer(int id){ //view the issuer of the bond
-        List<Security> bonds = securityRepository.findAll();
-        return bonds.get(id).getIssuerName(); //0-indexed
-    }
-
     public Security getBondById(int id){
         List<Security> bonds = securityRepository.findAll();
         for (Security bond : bonds) {
@@ -83,11 +78,10 @@ public class BondsService implements CommandLineRunner{
         }
         return qualifying;
     }
-    
-    public String bondsISINandCUSIP(int id){ //view a Bond’s ISIN and CUSIP code
+
+    public Pair<String, String> bondsISINandCUSIP(int id){ //view a Bond’s ISIN and CUSIP code
         List<Security> bonds = securityRepository.findAll();
-        Pair<String, String> isinAndCusip = new Pair<String, String>(bonds.get(id).getIsin(), bonds.get(id).getCusip()); //0-indexed
-        return "ISIN Code: " + isinAndCusip.getValue0() + "\n" + "CUSIP Code: " + isinAndCusip.getValue1();
+        return new Pair<String, String>(bonds.get(id).getIsin(), bonds.get(id).getCusip()); //0-indexed;
     }
 
     // as a user I want to be able to see bonds in books I am responsible for
@@ -117,17 +111,17 @@ public class BondsService implements CommandLineRunner{
         return qualifying; 
     }
 
-    // view the client name of the bond = bond holder
+    // view the issuer and client(bond holder) of a bond
         //given security_id as bond id, get counterparty_id from trades
         //given counterparty_id, get client_name from counterparties using counterparty_id
-    public String viewClient(int id){ //view the client of the bond = bond holder
+    public Pair<String, String> viewIssuerAndClient(int id){ //view the client of the bond = bond holder
         List<Security> bonds = securityRepository.findAll();
         List<Trade> trades = tradeRepository.findAll();
         for (Security bond : bonds) {
             if (bond.getId() == id) {
                 for (Trade trade : trades) {
                     if (trade.getSecurity_id().getId() == bond.getId()) {
-                        return trade.getCounterparty_id().getName();
+                        return new Pair<String, String>(bonds.get(id).getIssuerName(), trade.getCounterparty_id().getName());
                     }
                 }
             }
@@ -141,14 +135,42 @@ public class BondsService implements CommandLineRunner{
     public void run(String... args) throws Exception {
         System.out.println("*** testing ***");
         System.out.println("*** convert string to date: " + LocalDate.parse("2023-08-03") + "***");
-        System.out.println("*** issuer: " + viewIssuer(0) + "***");
-        System.out.println(bondsISINandCUSIP(0));
+        System.out.println(bondsISINandCUSIP(0)); //0-indexed
         // System.out.println(bondsMaturedAndMaturing());
-        System.out.println("*** bond by id: " + getBondById(1) + "***");
-        System.out.println("*** bonds in books: " + bondsInBooks(2) + "***");
-        System.out.println("*** counterparty: " + viewClient(1) + "***");
+        // System.out.println("*** issuer: " + viewIssuer(1) + "***"); //0-indexed
+        // System.out.println("*** client: " + viewClient(1) + "***"); //1-indexed
+        System.out.println("*** bond by id: " + getBondById(1) + "***"); //1-indexed
+        System.out.println("*** bonds in books: " + bondsInBooks(2) + "***"); //1-indexed
+        System.out.println("*** counterparty: " + viewIssuerAndClient(1) + "***"); //0-indexed, 1-indexed
+        
     }
 }
+
+    // public String viewIssuer(int id){ //view the issuer of the bond
+    //     List<Security> bonds = securityRepository.findAll();
+    //     return bonds.get(id).getIssuerName(); //0-indexed
+    // }
+
+    // public String viewClient(int id){ //view the client of the bond = bond holder
+    //     List<Security> bonds = securityRepository.findAll();
+    //     List<Trade> trades = tradeRepository.findAll();
+    //     for (Security bond : bonds) {
+    //         if (bond.getId() == id) {
+    //             for (Trade trade : trades) {
+    //                 if (trade.getSecurity_id().getId() == bond.getId()) {
+    //                     return trade.getCounterparty_id().getName();
+    //                 }
+    //             }
+    //         }
+    //     }
+    //     return null;
+    // }
+
+    // public String bondsISINandCUSIP(int id){ //view a Bond’s ISIN and CUSIP code
+    //     List<Security> bonds = securityRepository.findAll();
+    //     Pair<String, String> isinAndCusip = new Pair<String, String>(bonds.get(id).getIsin(), bonds.get(id).getCusip()); //0-indexed
+    //     return "ISIN Code: " + isinAndCusip.getValue0() + "\n" + "CUSIP Code: " + isinAndCusip.getValue1();
+    // }
 
     // public Pair<List<Security>, List<Security>> bondsMaturedAndMaturing(){  //mature and maturing bonds
     //     List<Security> bonds = securityRepository.findAll();
