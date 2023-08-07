@@ -153,8 +153,8 @@ public class BondsService implements CommandLineRunner{
     @Override
     public void run(String... args) throws Exception {
         System.out.println("*** Testing ***");
-        // System.out.println("*** bonds to be mature: " + bondsToBeMature("2021-08-09") + "***");
-        System.out.println("*** bonds matured: " + bondsMatured("2021-08-10") + "***");
+        System.out.println("*** bonds to be mature: " + bondsToBeMature("2021-08-09") + "***");
+        // System.out.println("*** bonds matured: " + bondsMatured("2021-08-10") + "***");
         // System.out.println("*** convert string to date: " + LocalDate.parse("2023-08-03") + "***");
         // System.out.println(bondsISINandCUSIP(0)); //0-indexed
         // System.out.println(bondsMaturedAndMaturing());
