@@ -28,7 +28,7 @@ export const SettlingBonds = () => {
                     <Form.Label>Choose a Date: </Form.Label>
                     <br></br>
                     <LocalizationProvider dateAdapter={AdapterDateFns}>
-                        <DatePicker label="Maturity Date" value={date} onChange={(newValue) => {setDate(newValue);}}/>
+                        <DatePicker label="Settling Date" value={date} onChange={(newValue) => {setDate(newValue);}}/>
                     </LocalizationProvider>
                 </Form.Group>
       </Form>
@@ -53,12 +53,21 @@ export const SettlingBonds = () => {
             <th>Settlement Date</th>
         </tr>
             {bonds.map((bond, key) => {
+              let str = bond.security_id.maturityDate;
+              var result = str.substr(5) + "-" + str.substr(0, 5);
+              result = result.substring(0, result.length-1);
+              let str2 = bond.tradeDate;
+              var result2 = str2.substr(5) + "-" + str2.substr(0, 5);
+              result2 = result2.substring(0, result2.length-1);
+              let str3 = bond.settlementDate;
+              var result3 = str3.substr(5) + "-" + str3.substr(0, 5);
+              result3 = result3.substring(0, result3.length-1);
               return (
                   <tr key={key}>
                     <td>{bond.security_id.isin}</td>
                     <td>{bond.security_id.cusip} </td>
                     <td>{bond.security_id.issuerName}</td>
-                    <td>{bond.security_id.maturityDate}</td>
+                    <td>{result}</td>
                     <td>{bond.security_id.coupon}</td>
                     <td>{bond.security_id.type}</td>
                     <td>{bond.security_id.faceValue}</td>
@@ -68,8 +77,8 @@ export const SettlingBonds = () => {
                     <td>{bond.quantity}</td>
                     <td>{bond.unitPrice}</td>
                     <td>{bond.buySell}</td>
-                    <td>{bond.tradeDate}</td>
-                    <td>{bond.settlementDate}</td>
+                    <td>{result2}</td>
+                    <td>{result3}</td>
                   </tr>
               )
           })}

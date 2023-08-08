@@ -58,12 +58,15 @@ export const MatureBonds = () => {
             <th>Status</th>
         </tr>
             {bonds.map((bond, key) => {
+              let str = bond.maturityDate;
+              var result = str.substr(5) + "-" + str.substr(0, 5);
+              result = result.substring(0, result.length-1);
               return (
                   <tr key={key}>
                     <td>{bond.isin}</td>
                     <td>{bond.cusip} </td>
                     <td>{bond.issuerName}</td>
-                    <td>{bond.maturityDate}</td>
+                    <td>{result}</td>
                     <td>{bond.coupon}</td>
                     <td>{bond.type}</td>
                     <td>{bond.faceValue}</td>
@@ -90,12 +93,15 @@ export const MatureBonds = () => {
             <th>Status</th>
         </tr>
         {bonds2.map((bond, key) => {
+          let str = bond.maturityDate;
+          var result = str.substr(5) + "-" + str.substr(0, 5);
+          result = result.substring(0, result.length-1);
             return (
                 <tr key={key}>
                   <td>{bond.isin}</td>
                   <td>{bond.cusip} </td>
                   <td>{bond.issuerName}</td>
-                  <td>{bond.maturityDate}</td>
+                  <td>{result}</td>
                   <td>{bond.coupon}</td>
                   <td>{bond.type}</td>
                   <td>{bond.faceValue}</td>
